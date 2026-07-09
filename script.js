@@ -55,9 +55,13 @@ digitsdiv.addEventListener('click', (e) => {
         isFinished = false; 
     }
     if (operator===""){
+        if (a === "0" && digit === "0") return;
+        if (a === "0" && digit !== "0") a = "";
         a+=digit;
         displaydiv.textContent=a;
     } else {
+        if (b === "0" && digit === "0") return;
+        if (b === "0" && digit !== "0") b = "";
         b+=digit;
         displaydiv.textContent=b;
     }
@@ -78,9 +82,13 @@ document.addEventListener('keydown', (e) => {
             isFinished = false; 
         }
         if (operator===""){
+            if (a === "0" && digit === "0") return;
+            if (a === "0" && digit !== "0") a = "";
             a+=key;
             displaydiv.textContent=a;
         } else {
+            if (b === "0" && digit === "0") return;
+            if (b === "0" && digit !== "0") b = "";
             b+=key;
             displaydiv.textContent=b;
         }

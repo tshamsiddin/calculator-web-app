@@ -13,25 +13,28 @@ body {
     gap: 10px;
     max-width: 360px;
     margin: 0 auto;
-    padding: 20px;
-    background-color: #171717;
+    padding: 25px;
+    background-color: #000000;
     border-radius: 16px;
 }
 .display {
     grid-area: 1 / 1 / 1 / 5;
-    background-color: #252525;
-    height: 50px;
+    background-color: #3a3a3c;
+    height: 150px;
     color: #ffffff;
     font-size: 2.5rem;
     padding: 20px;
     text-align: right;
     border-radius: 8px;
     margin-bottom: 10px;
+    margin-top: 25px;
     overflow-x: auto;
     white-space: nowrap;
-}
-.display {
     grid-column: span 4;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 .digits, .operator {
     display: contents;
@@ -42,30 +45,47 @@ body {
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    background-color: #3a3a3c;
+    color: #ffffff;
+}
+.operator button {
+    background-color: #ff9f0a;
+    color: #ffffff;
+}
+.container button:hover {
+    filter: brightness(1.2);
+    transition: background 0.15s ease;
+}
+.clear, .delete {
+    background-color: #a5a5a5;
+    color: #000000;
+}
+.container button:active {
+    transform: scale(0.95);
 }
 /* Grid mapping */
-.digits button:nth-child(1) { grid-area: 2 / 1; } /* 7 */
-.digits button:nth-child(2) { grid-area: 2 / 2; } /* 8 */
-.digits button:nth-child(3) { grid-area: 2 / 3; } /* 9 */
-.operator button:nth-child(4) { grid-area: 2 / 4; } /* / */
+.digits button:nth-child(1) { grid-area: 2 / 1; }
+.digits button:nth-child(2) { grid-area: 2 / 2; }
+.digits button:nth-child(3) { grid-area: 2 / 3; } 
+.operator button:nth-child(4) { grid-area: 2 / 4; }
 
 /* Row 2: 4, 5, 6, * */
-.digits button:nth-child(4) { grid-area: 3 / 1; } /* 4 */
-.digits button:nth-child(5) { grid-area: 3 / 2; } /* 5 */
-.digits button:nth-child(6) { grid-area: 3 / 3; } /* 6 */
-.operator button:nth-child(3) { grid-area: 3 / 4; } /* * */
+.digits button:nth-child(4) { grid-area: 3 / 1; }
+.digits button:nth-child(5) { grid-area: 3 / 2; } 
+.digits button:nth-child(6) { grid-area: 3 / 3; } 
+.operator button:nth-child(3) { grid-area: 3 / 4; } 
 
 /* Row 3: 1, 2, 3, - */
-.digits button:nth-child(7) { grid-area: 4 / 1; } /* 1 */
-.digits button:nth-child(8) { grid-area: 4 / 2; } /* 2 */
-.digits button:nth-child(9) { grid-area: 4 / 3; } /* 3 */
-.operator button:nth-child(2) { grid-area: 4 / 4; } /* - */
+.digits button:nth-child(7) { grid-area: 4 / 1; }
+.digits button:nth-child(8) { grid-area: 4 / 2; }
+.digits button:nth-child(9) { grid-area: 4 / 3; } 
+.operator button:nth-child(2) { grid-area: 4 / 4; } 
 
 /* Row 4: ., 0, <=, + */
 .dot { grid-area: 5 / 1; }
-.digits button:nth-child(10) { grid-area: 5 / 2; } /* 0 */
+.digits button:nth-child(10) { grid-area: 5 / 2; } 
 .delete { grid-area: 5 / 3; }
-.operator button:nth-child(1) { grid-area: 5 / 4; } /* + */
+.operator button:nth-child(1) { grid-area: 5 / 4; } 
 
 /* Row 5: C, = */
 .clear { grid-area: 6 / 1 / 6 / 3; }

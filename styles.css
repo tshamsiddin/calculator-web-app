@@ -77,13 +77,11 @@ body {
         padding: 12px;
         gap: 8px;
     }
-
     .display {
         height: 65px;
         font-size: 2rem;
         padding: 12px;
     }
-
     .container button {
         font-size: 1.25rem;
     }

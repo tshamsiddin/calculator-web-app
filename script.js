@@ -62,6 +62,37 @@ digitsdiv.addEventListener('click', (e) => {
     }
 });
 
+document.addEventListener('keydown', (e) => {
+    const key=e.key;
+    console.log(key);
+    if (key === '/' || key === 'Enter') {
+        event.preventDefault(); 
+    }
+    if (key>="0" && key<="9"){
+        if (isFinished) {
+            a = "";
+            b = "";
+            operator = "";
+            isFinished = false; 
+        }
+        if (operator===""){
+            a+=key;
+            displaydiv.textContent=a;
+        } else {
+            b+=key;
+            displaydiv.textContent=b;
+        }
+    } else if (["+", "-", "*", "/"].includes(key)){
+        handleOperator(key);
+    } else if (key==="=" || key==="Enter"){
+        calculatediv.click();
+    } else if (key==="Backspace"){
+        deletediv.click();
+    } else if (key==="."){
+        dotdiv.click();
+    }
+});
+
 dotdiv.addEventListener('click', () => {
     if (operator === "") {
         if (a.includes(".")) return;
@@ -77,18 +108,34 @@ dotdiv.addEventListener('click', () => {
     }
 });
 
-operatordiv.addEventListener('click', (e) => {
-    if (e.target.tagName!=="BUTTON") return;
-    isFinished = false;
-    if (a!=="" && b!=="" && operator!==""){
-        displaydiv.textContent=`${calculate(Number(a), Number(b), operator)}`;
-        a=displaydiv.textContent;
-        b="";
+function handleOperator(selectedOperator) {
+    if (a !== "" && b !== "" && operator !== "") {
+        displaydiv.textContent = `${calculate(Number(a), Number(b), operator)}`;
+        a = displaydiv.textContent;
+        b = "";
     } else {
-        displaydiv.textContent=e.target.textContent;
+        displaydiv.textContent = selectedOperator; 
     }
-    operator=e.target.textContent;       
+    operator = selectedOperator;
+    isFinished = false;
+}
+operatordiv.addEventListener('click', (e) => {
+    if (e.target.tagName !== "BUTTON") return;
+    handleOperator(e.target.textContent); // Pass the button text
 });
+
+// operatordiv.addEventListener('click', (e) => {
+//     if (e.target.tagName!=="BUTTON") return;
+//     isFinished = false;
+//     if (a!=="" && b!=="" && operator!==""){
+//         displaydiv.textContent=`${calculate(Number(a), Number(b), operator)}`;
+//         a=displaydiv.textContent;
+//         b="";
+//     } else {
+//         displaydiv.textContent=e.target.textContent;
+//     }
+//     operator=e.target.textContent;       
+// });
 
 calculatediv.addEventListener('click', () => {
     if (a==="" || b==="" || operator===""){

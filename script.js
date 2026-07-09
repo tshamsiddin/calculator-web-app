@@ -1,3 +1,16 @@
+const digitsdiv=document.querySelector('.digits');
+const operatordiv=document.querySelector('.operator');
+const displaydiv=document.querySelector('.display');
+const calculatediv=document.querySelector('.calculate');
+const cleardiv=document.querySelector('.clear');
+const deletediv=document.querySelector('.delete');
+const dotdiv=document.querySelector('.dot');
+
+let a="";
+let b="";
+let operator="";
+let isFinished = false;
+
 function add(a, b){
     return a+b;
 };
@@ -31,19 +44,7 @@ function calculate(a, b, operator){
     }
 }
 
-let a="";
-let b="";
-let operator="";
-let isFinished = false;
-
-const digitsdiv=document.querySelector('.digits');
-const operatordiv=document.querySelector('.operator');
-const displaydiv=document.querySelector('.display');
-const calculatediv=document.querySelector('.calculate');
-const cleardiv=document.querySelector('.clear');
-const deletediv=document.querySelector('.delete');
-const dotdiv=document.querySelector('.dot');
-
+// digit buttons
 digitsdiv.addEventListener('click', (e) => {
     if (e.target.tagName!=="BUTTON") return;
     const digit=e.target.textContent;
@@ -62,6 +63,7 @@ digitsdiv.addEventListener('click', (e) => {
     }
 });
 
+// keyboard
 document.addEventListener('keydown', (e) => {
     const key=e.key;
     console.log(key);
@@ -93,6 +95,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// .
 dotdiv.addEventListener('click', () => {
     if (operator === "") {
         if (a.includes(".")) return;
@@ -121,22 +124,10 @@ function handleOperator(selectedOperator) {
 }
 operatordiv.addEventListener('click', (e) => {
     if (e.target.tagName !== "BUTTON") return;
-    handleOperator(e.target.textContent); // Pass the button text
+    handleOperator(e.target.textContent);
 });
 
-// operatordiv.addEventListener('click', (e) => {
-//     if (e.target.tagName!=="BUTTON") return;
-//     isFinished = false;
-//     if (a!=="" && b!=="" && operator!==""){
-//         displaydiv.textContent=`${calculate(Number(a), Number(b), operator)}`;
-//         a=displaydiv.textContent;
-//         b="";
-//     } else {
-//         displaydiv.textContent=e.target.textContent;
-//     }
-//     operator=e.target.textContent;       
-// });
-
+// calculation proccess
 calculatediv.addEventListener('click', () => {
     if (a==="" || b==="" || operator===""){
         displaydiv.textContent="you think you slick, eh?";
@@ -150,6 +141,7 @@ calculatediv.addEventListener('click', () => {
     } 
 });
 
+// delete last digit or go back
 deletediv.addEventListener('click', () => {
     if (b !== "") {
         b = b.slice(0, -1);
@@ -165,6 +157,7 @@ deletediv.addEventListener('click', () => {
     }
 });
 
+// reset button
 cleardiv.addEventListener('click', () => {
     a="";
     b="";

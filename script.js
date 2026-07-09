@@ -44,27 +44,30 @@ function calculate(a, b, operator){
     }
 }
 
-// digit buttons
-digitsdiv.addEventListener('click', (e) => {
-    if (e.target.tagName!=="BUTTON") return;
-    const digit=e.target.textContent;
+function handleDigit(digit) {
     if (isFinished) {
         a = "";
         b = "";
         operator = "";
         isFinished = false; 
     }
-    if (operator===""){
-        if (a === "0" && digit === "0") return;
-        if (a === "0" && digit !== "0") a = "";
-        a+=digit;
-        displaydiv.textContent=a;
+
+    if (operator === "") {
+        if (a === "0" && digit === "0") return; 
+        if (a === "0" && digit !== "0") a = ""; 
+        a += digit;
+        displaydiv.textContent = a;
     } else {
         if (b === "0" && digit === "0") return;
         if (b === "0" && digit !== "0") b = "";
-        b+=digit;
-        displaydiv.textContent=b;
+        b += digit;
+        displaydiv.textContent = b;
     }
+}
+
+digitsdiv.addEventListener('click', (e) => {
+    if (e.target.tagName !== "BUTTON") return;
+    handleDigit(e.target.textContent); // Pass the clicked number
 });
 
 // keyboard
@@ -75,23 +78,7 @@ document.addEventListener('keydown', (e) => {
         event.preventDefault(); 
     }
     if (key>="0" && key<="9"){
-        if (isFinished) {
-            a = "";
-            b = "";
-            operator = "";
-            isFinished = false; 
-        }
-        if (operator===""){
-            if (a === "0" && digit === "0") return;
-            if (a === "0" && digit !== "0") a = "";
-            a+=key;
-            displaydiv.textContent=a;
-        } else {
-            if (b === "0" && digit === "0") return;
-            if (b === "0" && digit !== "0") b = "";
-            b+=key;
-            displaydiv.textContent=b;
-        }
+        handleDigit(key);
     } else if (["+", "-", "*", "/"].includes(key)){
         handleOperator(key);
     } else if (key==="=" || key==="Enter"){
